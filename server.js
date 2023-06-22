@@ -3,6 +3,7 @@ const express = require('express');
 const PORT = process.env.PORT || 3001;
 const path = require('path');
 const app = express();
+const fs = require('fs')
 
 
 app.use(express.json());
@@ -15,13 +16,15 @@ app.get('/api/notes', (req, res) => {
 );
 app.post('/api/notes', (req, res) => {
   console.log(req.body);
+
   const { title, text } = req.body;
   if (req.body) {
     const newTip = {
       title,
       text
     };
-    fs.readFileSync('/db/db.json').then((data) => res.json(JSON.parse(data)));
+    JSON.parse()
+    fs.readFileSync('./db/db.json', { encoding: 'utf8', flag: 'r'});
     res.json(`Note added successfully 🚀`);
   } else {
     res.error('Error in adding note');
