@@ -21,8 +21,7 @@ app.post('/api/notes', (req, res) => {
       title,
       text
     };
-
-    (newTip, './db/db.json');
+    fs.readFileSync('/db/db.json').then((data) => res.json(JSON.parse(data)));
     res.json(`Note added successfully 🚀`);
   } else {
     res.error('Error in adding note');
