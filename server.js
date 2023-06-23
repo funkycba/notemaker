@@ -23,9 +23,15 @@ app.post('/api/notes', (req, res) => {
       title,
       text
     };
-    JSON.parse()
-    fs.readFileSync('./db/db.json', { encoding: 'utf8', flag: 'r'});
-    res.json(`Note added successfully 🚀`);
+    // JSON.parse()
+    const dbread = JSON.parse(fs.readFileSync('./db/db.json', { encoding: 'utf8', flag: 'r'}));
+    console.log(dbread)
+    dbread.push(req.body);
+    console.log(dbread)
+    fs.writeFile('./db/db.json', JSON.stringify(dbread), function(){
+      res.json(`Note added successfully 🚀`);
+    })
+
   } else {
     res.error('Error in adding note');
   }
